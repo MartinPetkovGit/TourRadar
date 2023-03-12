@@ -10,8 +10,8 @@ public class EuropeToursTests extends Base {
     @Test
     public void verifyLengthSliderCorrectlyFiltersResults() {
 
-        EuropeToursPage.setLengthTo("", "");
-        EuropeToursPage.verifyResultsTourLength();
+        EuropeToursPage.setLengthTo(2, 17);
+        EuropeToursPage.verifyResultsTourLengthBetween(2, 17);
     }
 
     @Test
