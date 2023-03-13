@@ -3,7 +3,9 @@ package europe;
 import core.Base;
 import org.testng.annotations.Test;
 import pages.EuropeToursPage;
+import pages.LoginPage;
 import pages.MyAccountPage;
+import utils.Credentials;
 
 public class EuropeToursTests extends Base {
 
@@ -15,19 +17,16 @@ public class EuropeToursTests extends Base {
     }
 
     @Test
-    public void verifyUserIsAbleToSuccessfullyChangeName(){
-        MyAccountPage.loginWith();
-        MyAccountPage.navigateTo("");
-        MyAccountPage.saveUserCurrentName();
-        MyAccountPage.changeFullNameTo("");
-        MyAccountPage.verifySuccessMessage();
-        MyAccountPage.navigateTo("");
-        MyAccountPage.verifyNameChange();
+    public void verifyUserIsAbleToSuccessfullyChangeName() {
+        MyAccountPage.goToLoginPage();
+        LoginPage.loginWith(Credentials.validUsername, Credentials.validPassword);
+        MyAccountPage.navigateTo("My Account");
+        MyAccountPage.executeANameChangeAndVerifyItsSuccessful();
     }
 
     @Test
-    public void verifySortByPriceDesc() {
-        EuropeToursPage.sortBy("");
-        EuropeToursPage.verifyPriceSort("");
+    public void verifySortByPriceDesc() throws InterruptedException {
+        EuropeToursPage.sortBy("Total price: Highest first");
+        EuropeToursPage.verifyTotalPriceSort(true);
     }
 }
